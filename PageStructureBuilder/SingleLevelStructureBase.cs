@@ -1,10 +1,9 @@
 ﻿using EPiServer.Core;
-using PageTypeBuilder;
 
 namespace PageStructureBuilder
 {
     public abstract class SingleLevelStructureBase<TContainer> 
-        : TypedPageData, IOrganizeChildren
+        : PageData, IOrganizeChildren
         where TContainer : PageData
     {
         public virtual PageReference GetParentForPage(PageData page)

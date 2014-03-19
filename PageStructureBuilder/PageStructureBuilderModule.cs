@@ -9,7 +9,6 @@ using EPiServer.Security;
 
 namespace PageStructureBuilder
 {
-    [ModuleDependency(typeof(PageTypeBuilder.Initializer))]
     public class PageStructureBuilderModule : IInitializableModule
     {
         public void Initialize(InitializationEngine context)

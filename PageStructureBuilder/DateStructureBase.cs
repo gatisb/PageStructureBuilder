@@ -1,11 +1,10 @@
 ﻿using System;
 using EPiServer.Core;
-using PageTypeBuilder;
 
 namespace PageStructureBuilder
 {
     public abstract class DateStructureBase<TYear, TMonth, TDay> 
-        : TypedPageData, IOrganizeChildren
+        : PageData, IOrganizeChildren
         where TYear : PageData 
         where TMonth : PageData 
         where TDay : PageData

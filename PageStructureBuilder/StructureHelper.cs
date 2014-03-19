@@ -2,9 +2,10 @@
 using System.Linq;
 using EPiServer;
 using EPiServer.Core;
+using EPiServer.DataAbstraction;
 using EPiServer.DataAccess;
 using EPiServer.Security;
-using PageTypeBuilder;
+using EPiServer.ServiceLocation;
 
 namespace PageStructureBuilder
 {
@@ -40,13 +41,10 @@ namespace PageStructureBuilder
             where TResult : PageData
         {
             TResult child;
-            var resultPageTypeId = PageTypeResolver.Instance
-                .GetPageTypeID(typeof(TResult));
-            child = DataFactory.Instance.GetDefaultPageData(
-                parentLink, resultPageTypeId.Value) as TResult;
+            var resultPageTypeId = ServiceLocator.Current.GetInstance<IContentTypeRepository>().Load<TResult>().ID;
+            child = DataFactory.Instance.GetDefaultPageData(parentLink, resultPageTypeId) as TResult;
             child.PageName = pageName;
-            DataFactory.Instance.Save(
-                child, SaveAction.Publish, AccessLevel.NoAccess);
+            DataFactory.Instance.Save(child, SaveAction.Publish, AccessLevel.NoAccess);
             return child;
         }
     }
